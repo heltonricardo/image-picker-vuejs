@@ -2,7 +2,7 @@
   <div>
     <h1>{{ titulo }}</h1>
     <ul>
-      <li v-for="(foto, i) of fotos" :key="i">
+      <li v-for="(foto, i) in fotos" :key="i">
         <img :src="foto.url" :alt="foto.titulo" />
       </li>
     </ul>
@@ -14,39 +14,15 @@ export default {
   data() {
     return {
       titulo: "Image Picker",
-      fotos: [
-        {
-          url:
-            "https://super.abril.com.br/wp-content/uploads/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png",
-          titulo: "Cachorro",
-        },
-        {
-          url:
-            "https://super.abril.com.br/wp-content/uploads/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png",
-          titulo: "Cachorro",
-        },
-        {
-          url:
-            "https://super.abril.com.br/wp-content/uploads/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png",
-          titulo: "Cachorro",
-        },
-        {
-          url:
-            "https://super.abril.com.br/wp-content/uploads/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png",
-          titulo: "Cachorro",
-        },
-        {
-          url:
-            "https://super.abril.com.br/wp-content/uploads/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png",
-          titulo: "Cachorro",
-        },
-        {
-          url:
-            "https://super.abril.com.br/wp-content/uploads/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png",
-          titulo: "Cachorro",
-        },
-      ],
+      fotos: [],
+      isLoading: true,
     };
+  },
+  created() {
+    this.$http
+      .get("http://localhost:3000/v1/fotos")
+      .then((res) => res.json())
+      .then((fotos) => (this.fotos = fotos));
   },
 };
 </script>
