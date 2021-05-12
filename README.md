@@ -1,6 +1,6 @@
 # image-picker-vuejs
 
-> A Vue.js project
+> Projeto de um painel de imagens usando Vue.js.
 
 ## Build Setup
 
