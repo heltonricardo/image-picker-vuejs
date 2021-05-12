@@ -1,8 +1,16 @@
 <template>
   <div class="corpo">
     <h1 class="centralizado">{{ titulo }}</h1>
+
+    <input
+      type="search"
+      class="filtro"
+      placeholder="filtre por parte do título"
+      v-on:input="filtro = $event.target.value"
+    />
+
     <ul class="lista-fotos">
-      <li class="lista-fotos-item" v-for="(foto, i) in fotos" :key="i">
+      <li class="lista-fotos-item" v-for="(foto, i) in fotosComFiltro" :key="i">
         <meu-painel :titulo="foto.titulo">
           <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo" />
         </meu-painel>
@@ -19,12 +27,25 @@ export default {
     "meu-painel": Painel,
   },
 
+  computed: {
+    fotosComFiltro() {
+      if (this.filtro == "") {
+        return this.fotos;
+      } else {
+        const exp = new RegExp(this.filtro.trim(), "i");
+        return this.fotos.filter(foto => exp.test(foto.titulo));
+      }
+    },
+  },
+
   data() {
     return {
       titulo: "Image Picker",
       fotos: [],
+      filtro: "",
     };
   },
+
   created() {
     this.$http
       .get("http://localhost:3000/v1/fotos")
@@ -54,6 +75,11 @@ export default {
 }
 
 .imagem-responsiva {
+  width: 100%;
+}
+
+.filtro {
+  display: block;
   width: 100%;
 }
 </style>
