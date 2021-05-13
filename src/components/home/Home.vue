@@ -13,7 +13,12 @@
       <li class="lista-fotos-item" v-for="(foto, i) in fotosComFiltro" :key="i">
         <meu-painel :titulo="foto.titulo">
           <img-responsiva :url="foto.url" :titulo="foto.titulo" />
-          <botao tipo="button" rotulo="Remover"/>
+          <!-- O "botao" é um componente que nós mesmos criamos, sendo assim,
+           ele não está "preparado para receber uma ação de clique, pois não
+           especificamos isso em sua criação. Então usamos .native para enviar o
+           evento de clique para o verdadeiro componente nativo dentro do 
+           componente que criamos. -->
+          <botao tipo="button" rotulo="REMOVER" @click.native="remove(foto)" />
         </meu-painel>
       </li>
     </ul>
@@ -29,7 +34,7 @@ export default {
   components: {
     "meu-painel": Painel,
     "img-responsiva": ImagemResponsiva,
-    botao: Botao
+    botao: Botao,
   },
 
   computed: {
@@ -49,6 +54,14 @@ export default {
       fotos: [],
       filtro: "",
     };
+  },
+
+  methods: {
+    remove(foto) {
+      if (confirm("Confirma operação?")) {
+        alert("Remover " + foto.titulo);
+      }
+    },
   },
 
   created() {
