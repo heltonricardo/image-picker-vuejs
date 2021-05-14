@@ -12,7 +12,11 @@
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="(foto, i) in fotosComFiltro" :key="i">
         <meu-painel :titulo="foto.titulo">
-          <img-responsiva :url="foto.url" :titulo="foto.titulo" />
+          <img-responsiva
+            v-meu-transform="{animacao: true}"
+            :url="foto.url"
+            :titulo="foto.titulo"
+          />
           <!-- O "botao" é um componente que nós mesmos criamos, sendo assim,
            ele não está "preparado para receber uma ação de clique, pois não
            especificamos isso em sua criação. Então usamos .native para enviar o
