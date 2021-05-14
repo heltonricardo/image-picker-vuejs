@@ -13,13 +13,14 @@
       <li class="lista-fotos-item" v-for="(foto, i) in fotosComFiltro" :key="i">
         <meu-painel :titulo="foto.titulo">
           <!-- Usando a diretiva meu-transform, podemos passar de diversas
-          maneiras graças ao tratamento de mofifiers:
+          maneiras graças ao tratamento de modifiers e arg:
           v-meu-transform="15"
-          v-meu-transform.animar="15"
-          v-meu-transform.animar.antihorario="15"
+          v-meu-transform:aumentar="1.1"
+          v-meu-transform:aumentar.animar="1.1"
+          v-meu-transform:rotacionar.antihorario="15"
           -->
           <img-responsiva
-            v-meu-transform.animar.antihorario="15"
+            v-meu-transform:rotacionar.antihorario.animar="15"
             :url="foto.url"
             :titulo="foto.titulo"
           />
