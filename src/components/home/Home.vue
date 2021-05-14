@@ -18,7 +18,18 @@
            especificamos isso em sua criação. Então usamos .native para enviar o
            evento de clique para o verdadeiro componente nativo dentro do 
            componente que criamos. -->
-          <botao tipo="button" rotulo="REMOVER" @click.native="remove(foto)" />
+          <botao
+            tipo="button"
+            rotulo="REMOVER"
+            @botaoAtivado="remove(foto)"
+          />
+          <!--  O argumento opcional $event é o valor que o botão (elemento
+          filho) enviou para a Home (elemento pai). É uma forma de comunicação:
+          <botao
+            tipo="button"
+            rotulo="REMOVER"
+            @botaoAtivado="remove(foto, $event)"
+          /> -->
         </meu-painel>
       </li>
     </ul>
@@ -57,10 +68,11 @@ export default {
   },
 
   methods: {
+    // Caso houvesse a comunicação do filho com o pai através do $event:
+    // remove(foto, $event) {
     remove(foto) {
-      if (confirm("Confirma operação?")) {
-        alert("Remover " + foto.titulo);
-      }
+      // alert($event);
+      alert("Remover " + foto.titulo);
     },
   },
 

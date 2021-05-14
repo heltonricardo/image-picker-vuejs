@@ -1,10 +1,24 @@
 <template>
-  <button class="botao botao-perigo" :type="tipo">{{ rotulo }}</button>
+  <button @click="disparaAcao()" class="botao botao-perigo" :type="tipo">
+    {{ rotulo }}
+  </button>
 </template>
 
 <script>
 export default {
   props: ["tipo", "rotulo"],
+  methods: {
+    disparaAcao() {
+      /* O emit dispara um evento. Quem responderá a esse evento é o componente
+       * pai. Também é possível enviar dados, no caso enviamos uma data no
+       * código comentado.
+       */
+      if (confirm("Confirma operação?")) {
+        this.$emit("botaoAtivado");
+        // this.$emit("botaoAtivado", new Date());
+      }
+    },
+  },
 };
 </script>
 
