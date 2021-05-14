@@ -17,14 +17,18 @@
            ele não está "preparado para receber uma ação de clique, pois não
            especificamos isso em sua criação. Então usamos .native para enviar o
            evento de clique para o verdadeiro componente nativo dentro do 
-           componente que criamos. -->
+           componente que criamos. O atributo "confirmacao" precisa de v-bind
+           para que o componente filho o entenda como valor/operação que está
+           entre aspas, e não como uma string -->
           <botao
             tipo="button"
             rotulo="REMOVER"
+            :confirmacao="false"
+            estilo="perigo"
             @botaoAtivado="remove(foto)"
           />
-          <!--  O argumento opcional $event é o valor que o botão (elemento
-          filho) enviou para a Home (elemento pai). É uma forma de comunicação:
+          <!--  O argumento opcional $event é o valor que o botão (componente
+          filho) enviou para a Home (componente pai) como forma de comunicação:
           <botao
             tipo="button"
             rotulo="REMOVER"
