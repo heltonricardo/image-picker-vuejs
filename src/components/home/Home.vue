@@ -23,7 +23,7 @@
           <botao
             tipo="button"
             rotulo="REMOVER"
-            :confirmacao="false"
+            :confirmacao="true"
             estilo="perigo"
             @botaoAtivado="remove(foto)"
           />
