@@ -12,11 +12,18 @@
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="(foto, i) in fotosComFiltro" :key="i">
         <meu-painel :titulo="foto.titulo">
+          <!-- Usando a diretiva meu-transform, podemos passar de diversas
+          maneiras graças ao tratamento de mofifiers:
+          v-meu-transform="15"
+          v-meu-transform.animar="15"
+          v-meu-transform.animar.antihorario="15"
+          -->
           <img-responsiva
-            v-meu-transform="{animacao: true}"
+            v-meu-transform.animar.antihorario="15"
             :url="foto.url"
             :titulo="foto.titulo"
           />
+
           <!-- O "botao" é um componente que nós mesmos criamos, sendo assim,
            ele não está "preparado para receber uma ação de clique, pois não
            especificamos isso em sua criação. Então usamos .native para enviar o

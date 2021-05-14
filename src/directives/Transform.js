@@ -11,16 +11,13 @@ Vue.directive("meu-transform", {
     let current = 0;
 
     el.addEventListener("dblclick", function() {
-      let incremento = 90;
-      let animacao = false;
+      let valor = binding.value || 90;
 
-      if (binding.value) {
-        incremento = binding.value.incremento || incremento;
-        animacao = binding.value.animacao || animacao;
-      }
+      if (binding.modifiers.antihorario) current -= valor;
+      else current += valor;
 
-      current += incremento;
-      if (animacao) el.style.transition = "transform .3s";
+      if (binding.modifiers.animar) el.style.transition = "transform .3s";
+
       el.style.transform = `rotate(${current}deg)`;
     });
   }
