@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 class="centralizado">{{ titulo }}</h1>
+    <p v-show="mensagem" class="centralizado">{{ mensagem }}</p>
 
     <input
       type="search"
@@ -86,15 +87,23 @@ export default {
       titulo: "Image Picker",
       fotos: [],
       filtro: "",
+      mensagem: "",
     };
   },
 
   methods: {
-    // Caso houvesse a comunicação do filho com o pai através do $event:
-    // remove(foto, $event) {
+    /* Caso houvesse a comunicação do filho com o pai através do $event,
+     * receberíamos via parâmertro: remove(foto, $event) e seria acessível
+     * normalmente como, por exemplo, alert($event).
+     */
     remove(foto) {
-      // alert($event);
-      alert("Remover " + foto.titulo);
+      this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`).then(
+        () => (this.mensagem = "Foto removida com sucesso!"),
+        (err) => {
+          console.log(err);
+          this.mensagem = "Não foi possível remover a imagem.";
+        }
+      );
     },
   },
 
