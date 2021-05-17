@@ -1,5 +1,3 @@
-<!-- alurapic/src/components/cadastro/Cadastro.vue -->
-
 <template>
   <div>
     <h1 class="centralizado">Cadastro</h1>
