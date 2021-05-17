@@ -97,7 +97,7 @@ export default {
      * normalmente como, por exemplo, alert($event).
      */
     remove(foto) {
-      this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`).then(
+      this.$http.delete(`v1/fotos/${foto._id}`).then(
         () => {
           const indice = this.fotos.indexOf(foto);
           this.fotos.splice(indice, 1);
@@ -113,7 +113,7 @@ export default {
 
   created() {
     this.$http
-      .get("http://localhost:3000/v1/fotos")
+      .get("v1/fotos")
       .then((res) => res.json())
       .then((fotos) => (this.fotos = fotos));
   },
