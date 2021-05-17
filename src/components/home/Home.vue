@@ -57,11 +57,17 @@ import Painel from "../shared/painel/Painel";
 import ImagemResponsiva from "../shared/imagem-responsiva/ImageResponsiva";
 import Botao from "../shared/botao/Botao";
 
+import transform from "../../directives/Transform";
+
 export default {
   components: {
     "meu-painel": Painel,
     "img-responsiva": ImagemResponsiva,
     botao: Botao,
+  },
+
+  directives: {
+    "meu-transform": transform,
   },
 
   computed: {
