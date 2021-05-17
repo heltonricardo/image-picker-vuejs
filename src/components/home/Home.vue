@@ -97,7 +97,7 @@ export default {
      * normalmente como, por exemplo, alert($event).
      */
     remove(foto) {
-      this.$http.delete(`v1/fotos/${foto._id}`).then(
+      this.resource.delete({ id: foto._id }).then(
         () => {
           const indice = this.fotos.indexOf(foto);
           this.fotos.splice(indice, 1);
@@ -112,8 +112,10 @@ export default {
   },
 
   created() {
-    this.$http
-      .get("v1/fotos")
+    // o query (get) não pega a parte de /id da url
+    this.resource = this.$resource("v1/fotos{/id}");
+    this.resource
+      .query()
       .then((res) => res.json())
       .then((fotos) => (this.fotos = fotos));
   },
