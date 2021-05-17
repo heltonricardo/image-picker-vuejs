@@ -54,7 +54,7 @@
 
 <script>
 import Painel from "../shared/painel/Painel";
-import ImagemResponsiva from "../shared/imagem-responsiva/ImageResponsiva";
+import ImagemResponsiva from "../shared/imagem-responsiva/ImagemResponsiva";
 import Botao from "../shared/botao/Botao";
 
 import transform from "../../directives/Transform";
