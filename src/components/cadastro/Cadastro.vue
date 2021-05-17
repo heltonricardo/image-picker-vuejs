@@ -6,23 +6,24 @@
     <form @submit.prevent="grava">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input
-          id="titulo"
-          autocomplete="off"
-          @input="foto.titulo = $event.target.value"
-          :value="foto.titulo"
-        />
+        <!-- Usar os dois fluxos de dados unidirecionais como:
+        @input="foto.titulo = $event.target.value"    e    :value="foto.titulo"
+        é equivalente a usar o v-model="foto.titulo" (fluxo bidirecional) -->
+        <input id="titulo" autocomplete="off" v-model.lazy="foto.titulo" />
       </div>
 
+      <!-- O modifier lazy só faz a associação de dados quando deixamos aquele
+      campo, quando "vamos para outro campo". Já quando usamos v-show, o campo
+      só será atualizado quando o que for passado para v-show for verdadeiro.
+      Lembrando que uma string vazia é false para javascript. -->
       <div class="controle">
         <label for="url">URL</label>
-        <input
-          id="url"
-          autocomplete="off"
-          @input="foto.url = $event.target.value"
-          :value="foto.url"
+        <input id="url" autocomplete="off" v-model.lazy="foto.url" />
+        <imagem-responsiva
+          :titulo="foto.titulo"
+          :url="foto.url"
+          v-show="foto.url"
         />
-        <imagem-responsiva />
       </div>
 
       <div class="controle">
@@ -30,8 +31,7 @@
         <textarea
           id="descricao"
           autocomplete="off"
-          @input="foto.descricao = $event.target.value"
-          :value="foto.descricao"
+          v-model="foto.descricao"
         ></textarea>
       </div>
 
