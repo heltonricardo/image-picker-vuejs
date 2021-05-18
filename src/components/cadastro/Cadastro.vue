@@ -37,7 +37,7 @@
 
       <div class="centralizado">
         <meu-botao rotulo="GRAVAR" tipo="submit" />
-        <router-link :to="{name: 'home'}"
+        <router-link :to="{ name: 'home' }"
           ><meu-botao rotulo="VOLTAR" tipo="button"
         /></router-link>
       </div>
@@ -59,6 +59,7 @@ export default {
   data() {
     return {
       foto: new Foto(),
+      id: this.$route.params.id,
     };
   },
 
@@ -73,6 +74,9 @@ export default {
 
   created() {
     this.service = new FotoService(this.$resource);
+    if (this.id) {
+      this.service.busca(this.id).then((foto) => (this.foto = foto));
+    }
   },
 };
 </script>
