@@ -25,7 +25,9 @@
             :url="foto.url"
             :titulo="foto.titulo"
           />
-
+          <router-link :to="{ name: 'altera', params: { id: foto._id } }">
+            <botao tipo="button" rotulo="ALTERAR" />
+          </router-link>
           <!-- O "botao" é um componente que nós mesmos criamos, sendo assim,
            ele não está "preparado para receber uma ação de clique, pois não
            especificamos isso em sua criação. Então usamos .native para enviar o
