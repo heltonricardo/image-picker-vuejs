@@ -14,7 +14,7 @@ import { routes } from "../../../routes";
 export default {
   data() {
     return {
-      rotas: routes,
+      rotas: routes.filter(route => route.menu),
     };
   },
 };
