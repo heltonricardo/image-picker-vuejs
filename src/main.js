@@ -5,6 +5,7 @@ import VueResource from "vue-resource";
 import VueRouter from "vue-router";
 import { routes } from "./routes";
 import "./directives/Transform";
+import VeeValidate from "vee-validate";
 
 Vue.use(VueResource);
 Vue.http.options.root = "http://localhost:3000";
@@ -14,6 +15,8 @@ Vue.use(VueRouter);
  * nome no lugar de "routes: routes".
  */
 const router = new VueRouter({ routes, mode: "history" });
+
+Vue.use(VeeValidate);
 
 // A mesma técnica do exemplo acima:
 new Vue({
