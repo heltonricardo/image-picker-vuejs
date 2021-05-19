@@ -7,11 +7,22 @@
     <h2 v-else class="centralizado">Incluindo</h2>
     <form @submit.prevent="grava">
       <div class="controle">
-        <label for="titulo">TÍTULO</label>
+        <label for="titulo">TÍTULO *</label>
         <!-- Usar os dois fluxos de dados unidirecionais como:
         @input="foto.titulo = $event.target.value"    e    :value="foto.titulo"
         é equivalente a usar o v-model="foto.titulo" (fluxo bidirecional) -->
-        <input id="titulo" autocomplete="off" v-model.lazy="foto.titulo" />
+        <input
+          v-validate
+          data-vv-rules="required|min:3|max:30"
+          data-vv-as="título"
+          name="titulo"
+          id="titulo"
+          autocomplete="off"
+          v-model="foto.titulo"
+        />
+        <span class="erro" v-show="errors.has('titulo')">{{
+          errors.first("titulo")
+        }}</span>
       </div>
 
       <!-- O modifier lazy só faz a associação de dados quando deixamos aquele
@@ -19,8 +30,18 @@
       só será atualizado quando o que for passado para v-show for verdadeiro.
       Lembrando que uma string vazia é false para javascript. -->
       <div class="controle">
-        <label for="url">URL</label>
-        <input id="url" autocomplete="off" v-model.lazy="foto.url" />
+        <label for="url">URL *</label>
+        <input
+          v-validate
+          data-vv-rules="required"
+          name="url"
+          id="url"
+          autocomplete="off"
+          v-model="foto.url"
+        />
+        <span class="erro" v-show="errors.has('url')">{{
+          errors.first("url")
+        }}</span>
         <imagem-responsiva
           :titulo="foto.titulo"
           :url="foto.url"
@@ -56,33 +77,37 @@ import FotoService from "../../domain/foto/FotoService";
 export default {
   components: {
     "imagem-responsiva": ImagemResponsiva,
-    "meu-botao": Botao,
+    "meu-botao": Botao
   },
   data() {
     return {
       foto: new Foto(),
-      id: this.$route.params.id,
+      id: this.$route.params.id
     };
   },
 
   methods: {
     grava() {
-      this.service.cadastra(this.foto).then(
-        () => {
-          if (this.id) this.$router.push({ name: "home" });
-          this.foto = new Foto();
-        },
-        (err) => console.log(err)
-      );
-    },
+      this.$validator.validateAll().then(success => {
+        if (success) {
+          this.service.cadastra(this.foto).then(
+            () => {
+              if (this.id) this.$router.push({ name: "home" });
+              this.foto = new Foto();
+            },
+            err => console.log(err)
+          );
+        }
+      });
+    }
   },
 
   created() {
     this.service = new FotoService(this.$resource);
     if (this.id) {
-      this.service.busca(this.id).then((foto) => (this.foto = foto));
+      this.service.busca(this.id).then(foto => (this.foto = foto));
     }
-  },
+  }
 };
 </script>
 
@@ -108,5 +133,9 @@ export default {
 
 .centralizado {
   text-align: center;
+}
+
+.erro {
+  color: red;
 }
 </style>
