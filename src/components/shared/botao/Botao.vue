@@ -14,14 +14,14 @@ export default {
   props: {
     tipo: {
       type: String,
-      required: true,
+      required: true
     },
     rotulo: {
       type: String,
-      required: true,
+      required: true
     },
     confirmacao: Boolean,
-    estilo: String,
+    estilo: String
   },
 
   methods: {
@@ -38,19 +38,22 @@ export default {
         return;
       }
       this.$emit("botaoAtivado");
-    },
+    }
   },
 
   computed: {
     estiloDoBotao() {
       if (this.estilo == "perigo") return "botao-perigo";
       return "botao-padrao";
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+$cor-padrao: darkcyan;
+$cor-perigo: firebrick;
+
 .botao {
   display: inline-block;
   padding: 10px;
@@ -61,10 +64,10 @@ export default {
 }
 
 .botao-perigo {
-  background: firebrick;
+  background: $cor-perigo;
 }
 
 .botao-padrao {
-  background: darkcyan;
+  background: $cor-padrao;
 }
 </style>
