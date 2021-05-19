@@ -4,8 +4,7 @@
  * arquivos só sejam carregados quando a página for acessada, e não quando a
  * aplicação é carregada, como acontece com a Home. O procedimento citado serve
  * para quando ocorre build do projeto através do comando "npm run build". Após
- * executar esse comando, copie o index.html e os arquivos build.js da pasta
- * dist para o servidor escolhido.
+ * executar esse comando, copie o index.html e a pasta dist para o servidor.
  */
 import Home from "./components/home/Home";
 const Cadastro = () =>
