@@ -4,12 +4,17 @@ import App from "./App.vue";
 import VueResource from "vue-resource";
 import VueRouter from "vue-router";
 import { routes } from "./routes";
-import "./directives/Transform";
 import VeeValidate from "vee-validate";
 import msg from "./pt_BR";
-import "./assets/css/teste.css"
+
 // Para importar algo dentro da pasta node_modules não usamos o "./":
 import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/js/bootstrap.js"
+import "jquery/dist/jquery"
+
+import "./directives/Transform";
+import "./assets/css/teste.css"
+import "./assets/js/teste"
 
 Vue.use(VueResource);
 Vue.http.options.root = "http://localhost:3000";

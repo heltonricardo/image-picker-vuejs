@@ -1,0 +1,1 @@
+console.log("Importação global funcionou!")
